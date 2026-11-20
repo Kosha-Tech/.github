@@ -1,0 +1,93 @@
+name: Task
+description: Chore, upgrade, refactor or one step of a bigger feature
+type: Task
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        Title: imperative, ≤60 chars (e.g. "Upgrade Postgres client to v5").
+
+  - type: textarea
+    id: story
+    attributes:
+      label: User story
+      description: Optional for tasks. Fill it in when the task serves a real user; leave it empty when it does not (e.g. infra chores).
+      placeholder: As a <user>, I want <capability> so that <outcome>.
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Pass/fail checks that say when this is done.
+      placeholder: |
+        - [ ] <pass/fail check>
+        - [ ] <pass/fail check>
+        - [ ] <pass/fail check>
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Context
+      description: Optional. Why does this need doing? 1–3 sentences.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: repo
+    attributes:
+      label: Repo
+      options:
+        - personal-assistant-backend
+        - personal-assistant-client
+        - koshax-website
+        - infra
+        - koshax-IAC
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: touches
+    attributes:
+      label: What it touches
+      description: Tick everything this change affects. Reviewers and agents use this to know what else to check.
+      options:
+        - label: API contract (endpoints, request/response shape)
+        - label: Database schema or data migration
+        - label: Auth, permissions or user data
+        - label: Client UI
+        - label: Background jobs, queues or schedules
+        - label: Third-party integrations (LLM providers, payments, email, etc.)
+        - label: Infra, deployment or CI
+        - label: Config, env vars or secrets
+        - label: None of the above (isolated change)
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Issues or PRs this needs first, and what it blocks. Use full references, e.g. Kosha-Tech/infra#12.
+      placeholder: |
+        Depends on: Kosha-Tech/infra#12
+        Blocks: Kosha-Tech/personal-assistant-client#40
+
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true
+
+  - type: input
+    id: parent
+    attributes:
+      label: Parent issue
+      description: 'If this is one step of a bigger feature: Kosha-Tech/<repo>#123'
