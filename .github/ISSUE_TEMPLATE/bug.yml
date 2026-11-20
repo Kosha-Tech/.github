@@ -1,0 +1,106 @@
+name: Bug
+description: Something is broken or behaves wrongly
+type: Bug
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        Title: describe the wrong behaviour, ≤60 chars (e.g. "Login returns 500 when email has a plus sign").
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What happens today? 2–4 present-tense sentences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      value: "1. \n2. \n3.\n"
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What "fixed" means, as pass/fail checks. Include a regression test.
+      placeholder: |
+        - [ ] <expected behaviour>
+        - [ ] Regression test covers this case
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Production
+        - Staging
+        - Local
+    validations:
+      required: true
+
+  - type: dropdown
+    id: repo
+    attributes:
+      label: Repo
+      description: Best guess is fine.
+      options:
+        - personal-assistant-backend
+        - personal-assistant-client
+        - koshax-website
+        - infra
+        - koshax-IAC
+        - Not sure
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: touches
+    attributes:
+      label: What it touches
+      description: Tick everything this change affects. Reviewers and agents use this to know what else to check.
+      options:
+        - label: API contract (endpoints, request/response shape)
+        - label: Database schema or data migration
+        - label: Auth, permissions or user data
+        - label: Client UI
+        - label: Background jobs, queues or schedules
+        - label: Third-party integrations (LLM providers, payments, email, etc.)
+        - label: Infra, deployment or CI
+        - label: Config, env vars or secrets
+        - label: None of the above (isolated change)
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Issues or PRs this needs first, and what it blocks. Use full references, e.g. Kosha-Tech/infra#12.
+      placeholder: |
+        Depends on: Kosha-Tech/infra#12
+        Blocks: Kosha-Tech/personal-assistant-client#40
+
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk
+      description: 'Low: isolated change. Medium: touches shared code or data. High: auth, payments, data migration, or prod infra.'
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Error output, stack trace, request IDs. Screenshots can go in Problem.
+      render: shell
