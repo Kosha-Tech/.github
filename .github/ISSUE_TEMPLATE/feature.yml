@@ -1,0 +1,105 @@
+name: Feature
+description: New capability or change in behaviour
+type: Feature
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        Title: imperative, ≤60 chars, names the outcome (e.g. "Add rate limiting to the login endpoint").
+
+        Size: one issue = one agent session = one PR. Split anything bigger into sub-issues.
+
+        The core of this issue is the **user story** and the **acceptance criteria**. Everything else is supporting context.
+
+  - type: textarea
+    id: story
+    attributes:
+      label: User story
+      description: Who wants what, and why. One sentence per story.
+      placeholder: As a <user>, I want <capability> so that <outcome>.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: 3–7 pass/fail checks a tester can verify without asking questions.
+      placeholder: |
+        - [ ] <pass/fail check>
+        - [ ] <pass/fail check>
+        - [ ] <pass/fail check>
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Context
+      description: Optional. What is true today, and anything an agent needs to know that the story does not say.
+      placeholder: '`/api/login` accepts unlimited attempts. A script can try thousands of passwords per minute against one account.'
+    validations:
+      required: false
+
+  - type: dropdown
+    id: repo
+    attributes:
+      label: Repo
+      multiple: true
+      options:
+        - personal-assistant-backend
+        - personal-assistant-client
+        - koshax-website
+        - infra
+        - koshax-IAC
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: touches
+    attributes:
+      label: What it touches
+      description: Tick everything this change affects. Reviewers and agents use this to know what else to check.
+      options:
+        - label: API contract (endpoints, request/response shape)
+        - label: Database schema or data migration
+        - label: Auth, permissions or user data
+        - label: Client UI
+        - label: Background jobs, queues or schedules
+        - label: Third-party integrations (LLM providers, payments, email, etc.)
+        - label: Infra, deployment or CI
+        - label: Config, env vars or secrets
+        - label: None of the above (isolated change)
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Issues or PRs this needs first, and what it blocks. Use full references, e.g. Kosha-Tech/infra#12.
+      placeholder: |
+        Depends on: Kosha-Tech/infra#12
+        Blocks: Kosha-Tech/personal-assistant-client#40
+
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk
+      description: 'Low: isolated change. Medium: touches shared code or data. High: auth, payments, data migration, or prod infra.'
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true
+
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+
+  - type: textarea
+    id: links
+    attributes:
+      label: Links
+      description: Designs, docs, parent issue, related issues.
